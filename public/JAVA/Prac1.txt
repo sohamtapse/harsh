@@ -1,0 +1,98 @@
+1] Factorial-
+package exp1;
+
+public class Factorial{
+
+	public static void main(String[] args) {
+		int num = 10;
+		long factorial = 1;
+		for(int i = 1; i <= num; ++i)
+		{
+			// factorial = factorial * i;
+			factorial *= i;
+		}
+		System.out.printf("Factorial of %d = %d", num, factorial);
+	}
+
+}
+
+2] Factorial_user-
+package exp1;
+
+import java.util.Scanner;
+
+public class Factorial_user {
+
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		System.out.println("Enter the No to calculate its factorial: ");
+		double no;
+		no = in.nextDouble();
+		double fact = 1;
+		for(int i = 1; i<=no; ++i)
+		{
+			fact *=i;
+		}
+		System.out.println("Factorial =" + fact);
+	}
+
+}
+
+3] Prime_numbers-
+package exp1;
+
+public class Prime_numbers {
+
+	public static void main(String[] args) {
+		int i = 1;
+		int count = 1, flag =1;
+		System.out.println("1st Prime No = " + i );
+		while(count < 50 )
+		{
+			++i;
+			for( int j = 2; j < i/2; ++j)
+			{
+				if ( i%j == 0)
+				{
+					flag = 0;
+					break;
+				}
+			}
+			if (flag == 1)
+			{
+				++count;
+				System.out.println(count + "th Prime No = " + i );
+			}
+			else
+			flag = 1;
+		}
+	}
+
+}
+
+4] Sum_avg-
+package exp1;
+
+import java.util.Scanner;
+
+public class Sum_avg {
+
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		double no,sum =0, avg;
+		int n;
+		System.out.print("How many numbers you want to enter: ");
+		n = in.nextInt();
+		for( int i = 1; i<= n; ++i)
+		{
+			System.out.print("Enter the No: ");
+			no = in.nextDouble();
+			sum += no;
+		}
+		avg = sum/n;
+		System.out.println("Sum of " + n + " number is "+ sum);
+		System.out.println("Avg of " + n + " number is "+ avg);
+
+	}
+
+}

@@ -1,0 +1,80 @@
+1] Account-
+package exp9;
+
+public class Account {
+	private double balance=0;
+	public Account(double balance) {
+		this.balance=balance;
+	}
+	public synchronized void deposit(double amount) {
+		if (amount<0) {
+			System.out.println("can't be deposite");
+		}
+		this.balance+=amount;
+		System.out.println("Deposite :"+amount+"in thread"+Thread.currentThread().getId()+" Balance is :"+balance);
+	}
+	public synchronized void withdraw(double amount) {
+		if (amount<0|| amount>this.balance) {
+			System.out.println("can't be withdraw");
+		}
+		this.balance-=amount;
+		System.out.println("Withdraw:"+amount+"in thread"+Thread.currentThread().getId()+" Balance is :"+balance);
+	}
+}
+
+2] DepositeThread-
+package exp9;
+
+public class DepositeThread extends Thread {
+	private Account account;
+	private double amount;
+	public DepositeThread(Account account, double amount) {
+		this.account = account;
+		this.amount = amount;
+	}
+	public void run() {
+		account.deposit(amount);
+	}
+}
+
+3] MainThread-
+package exp9;
+
+public class MainThread {
+
+	public static void main(String[] args) {
+		Thread obj = Thread.currentThread();
+		System.out.println("Current thread is " +obj);
+		System.out.println("Name of current thread is " +obj.getName());
+		obj.setName("Multi Thread"); // Changing name of main thread.
+		System.out.println("Name of current thread after changing name is " +obj);
+		Account accObj= new Account(100);
+		Thread t1= new Thread( new DepositeThread(accObj,30));
+		t1.setName("Deposite Thread");
+		System.out.println("Name of current thread is " +t1.getName());
+		t1.start();
+		Thread t2= new Thread( new DepositeThread(accObj,10));
+		t2.start();
+		Thread t3=new Thread( new WithdrawThread(accObj,150));
+		t3.start();
+		Thread t4=new Thread( new DepositeThread(accObj,20));
+		t4.start();
+		new Thread( new DepositeThread(accObj,30)).start();
+		new Thread( new WithdrawThread(accObj,30)).start();
+	}
+}
+
+4] WithdrawThread-
+package exp9;
+
+public class WithdrawThread implements Runnable {
+	private Account account;
+	private double amount;
+	public WithdrawThread(Account account, double amount) {
+		this.account = account;
+		this.amount = amount;
+	}
+	public void run() {
+		account.withdraw(amount);
+	}
+}

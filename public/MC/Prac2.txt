@@ -1,0 +1,48 @@
+1] Embedded C program for flashing led on LED bank-
+#include <REGX51.H>
+void delay(unsigned int time) {
+	unsigned int i, j;
+	for(i=0; i < time; i++);
+	for(j=0; j < 1275; j++);
+}
+void main() {
+	while(1) {
+		P1 = 0x00; 
+		delay(500);
+		P1=0xFF; 
+		delay(500);
+	}
+}
+
+2] LED Counter (Binary Counter)-
+#include<REGX51.H>
+void delay(unsigned int time){
+	unsigned int i,j;
+	for(i=0;i<time;i++);
+		for(j=0;j<1275;j++);
+	}
+void main(){
+	unsigned char count = 0;
+	while(1){
+		P1=count++;
+		delay(500);
+	}
+}
+
+3] Ring Counter (One LED Rotating)-
+#include<REGX51.H>
+void delay(unsigned int time){
+	unsigned int i,j;
+	for(i=0;i<time;i++);
+		for(j=0;j<1275;j++);
+	}
+void main(){
+	unsigned char val = 0x01;
+	while(1){
+		P1 = val;
+		delay(500);
+		val = val << 1;
+		if(val == 0x00)
+			val = 0x01;
+	}
+}
