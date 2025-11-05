@@ -205,6 +205,13 @@ export default function Home() {
             >
               Prac8.txt
             </a>
+            <a
+              href="/MC/STARTUP.txt"
+              download
+              className="px-6 py-3 bg-black text-white hover:bg-white hover:text-black rounded shadow-md transition w-full sm:w-auto text-center"
+            >
+              STARTUP.txt
+            </a>
           </div>
         </div>
       </div>
